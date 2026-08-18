@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finanza España - Préstamos 2% TAE</title>
+<style>body{margin:0;font-family:Arial;background:#f7f9fc}header{background:#0a2540;color:white;padding:20px;text-align:center;position:relative}.lang{position:absolute;top:15px;right:20px;background:white;color:#0a2540;padding:5px 10px;border-radius:5px;cursor:pointer;font-weight:bold}.box{max-width:700px;margin:20px auto;padding:25px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}.btn{display:block;background:#25D366;color:white;text-align:center;padding:16px;border-radius:8px;font-weight:bold;margin:20px 0;font-size:16px;border:none;cursor:pointer;width:100%}input,select{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:6px;font-size:15px}label{font-weight:bold;margin-top:10px;display:block}h2{color:#0a2540}footer{background:#0a2540;color:#fff;text-align:center;padding:20px;margin-top:40px;font-size:14px}</style>
+</head>
+<body>
+<header><div class="lang" onclick="switchLang()">ES/FR</div><h1 id="t1">Finanza España</h1><p id="t2">Préstamos de 1.000€ a 500.000€ al 2% TAE</p></header>
+<div class="box"><h2 id="t3">1. Simulador de Préstamo</h2><label id="t4">Cantidad a solicitar €</label><input id="a" type="number" value="20000"><label id="t5">Plazo en años</label><input id="y" type="number" value="5"><h3 id="t6">Cuota estimada: <span id="r">352.18</span> € / mes</h3></div>
+<div class="box"><h2 id="t8">2. Tus Datos Personales</h2><label id="t9">Nombre</label><input id="nom" type="text"><label id="t10">Apellidos</label><input id="prenom" type="text"><label id="t11">WhatsApp</label><input id="tel" type="tel"><label id="t12">Email</label><input id="email" type="email"><label id="t13">Profesión</label><input id="job" type="text"><label id="t14">Ciudad</label><input id="city" type="text"><label id="t15">¿Para qué es el préstamo?</label><select id="motif"><option>Vivienda</option><option>Coche</option><option>Negocio</option><option>Deudas</option><option>Otros</option></select><button class="btn" onclick="sendWhatsApp()" id="t16">Enviar Solicitud por WhatsApp</button></div>
+<footer>© 2026 Finanza España | WhatsApp: +34 695 79 65 48</footer>
+<script>
+let L="es";let D={es:{t1:"Finanza España",t2:"Préstamos de 1.000€ a 500.000€ al 2% TAE",t3:"1. Simulador de Préstamo",t4:"Cantidad a solicitar €",t5:"Plazo en años",t6:"Cuota estimada:",t8:"2. Tus Datos Personales",t9:"Nombre",t10:"Apellidos",t11:"WhatsApp",t12:"Email",t13:"Profesión",t14:"Ciudad",t15:"¿Para qué es el préstamo?",t16:"Enviar Solicitud por WhatsApp"},fr:{t1:"Finanza España",t2:"Prêts de 1.000€ à 500.000€ à 2% TAEG",t3:"1. Simulateur de Prêt",t4:"Montant demandé €",t5:"Durée en années",t6:"Mensualité estimée:",t8:"2. Vos Informations Personnelles",t9:"Nom",t10:"Prénom",t11:"WhatsApp",t12:"Email",t13:"Profession",t14:"Ville",t15:"Objet du prêt",t16:"Envoyer la Demande par WhatsApp"}};
+function switchLang(){L=L=="es"?"fr":"es";for(let i in D[L])document.getElementById(i).innerText=D[L][i];cal();}
+function cal(){let a=+document.getElementById("a").value||0;let y=+document.getElementById("y").value||1;let m=a*0.02/12/(1-Math.pow(1+0.02/12,-y*12));document.getElementById("r").innerText=m.toFixed(2)}
+document.getElementById("a").oninput=cal;document.getElementById("y").oninput=cal;
+function sendWhatsApp(){
+let n=document.getElementById("nom").value,p=document.getElementById("prenom").value,t=document.getElementById("tel").value,e=document.getElementById("email").value,j=document.getElementById("job").value,c=document.getElementById("city").value,mf=document.getElementById("motif").value,mt=document.getElementById("a").value,an=document.getElementById("y").value,cu=document.getElementById("r").innerText;
+if(n==""||t==""){alert(L=="es"?"Rellena Nombre y WhatsApp":"Remplis Nom et WhatsApp");return;}
+let msg=`*NUEVA SOLICITUD*%0A*Nombre:* ${n} ${p}%0A*WhatsApp:* ${t}%0A*Email:* ${e}%0A*Profesion:* ${j}%0A*Ciudad:* ${c}%0A*Cantidad:* ${mt} €%0A*Plazo:* ${an} años%0A*Cuota:* ${cu} €/mes%0A*Motivo:* ${mf}`;
+window.location.href=`https://wa.me/34695796548?text=${msg}`;
+}
+cal();
+</script></body></html>
